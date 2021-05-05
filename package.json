@@ -1,0 +1,86 @@
+{
+  "name": "vue-notus",
+  "version": "1.1.0",
+  "description": "Vue Notus - A free Tailwind CSS and VueJS UI Kit and Admin by Creative Tim.",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build && gulp licenses",
+    "lint": "vue-cli-service lint",
+    "build:tailwind": "tailwind build src/assets/styles/index.css -o src/assets/styles/tailwind.css",
+    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm run serve"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "5.15.3",
+    "@popperjs/core": "2.9.1",
+    "@tailwindcss/forms": "^0.3.2",
+    "@vue/compiler-sfc": "^3.0.11",
+    "axios": "^0.21.1",
+    "chart.js": "2.9.4",
+    "core-js": "3.9.1",
+    "gulp": "4.0.2",
+    "gulp-append-prepend": "1.0.8",
+    "localforage": "^1.9.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "mosha-vue-toastify": "^1.0.11",
+    "tailwindcss": "^2.1.2",
+    "vee-validate": "^4.3.5",
+    "vue": "^3.0.11",
+    "vue-class-component": "^8.0.0-0",
+    "vue-i18n": "^9.1.0",
+    "vue-router": "^4.0.6",
+    "vuex": "^4.0.0-0",
+    "vuex-persist": "^3.1.3",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@babel/core": "7.13.10",
+    "@babel/eslint-parser": "7.13.10",
+    "@intlify/vue-i18n-loader": "^2.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "@vue/cli-plugin-babel": "5.0.0-alpha.7",
+    "@vue/cli-plugin-eslint": "5.0.0-alpha.7",
+    "@vue/cli-plugin-typescript": "^4.5.12",
+    "@vue/cli-plugin-vuex": "^4.5.12",
+    "@vue/cli-service": "5.0.0-alpha.7",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "autoprefixer": "10.2.5",
+    "eslint": "7.22.0",
+    "eslint-plugin-vue": "7.7.0",
+    "postcss": "8.2.8",
+    "sass": "^1.32.12",
+    "sass-loader": "^11.0.1",
+    "typescript": "~4.1.5",
+    "vue-cli-plugin-i18n": "~2.1.0",
+    "vue-template-compiler": "2.6.12"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended",
+      "@vue/typescript"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "homepage": "https://demos.creative-tim.com/vue-notus/",
+  "license": "MIT",
+  "repository": "https://github.com/creativetimofficial/vue-notus"
+}
