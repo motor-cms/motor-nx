@@ -12,7 +12,7 @@ export default function baseForm(
   repository: Repository,
   model: Ref<{ [index: string]: any }>,
   schema: ObjectSchema<{}>,
-  sanitizer: () => void
+  sanitizer: () => void = () => {}
 ) {
   // Load i18n module
   const { t } = useI18n()
