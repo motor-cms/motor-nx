@@ -2,7 +2,6 @@ import baseForm from "@/forms/baseForm";
 import * as yup from "yup";
 import {ref} from "vue";
 import moment from "moment";
-// import {useI18n} from "vue-i18n";
 import eventRepository from "@/repositories/partymeister-core/eventRepository";
 import EventTypeService from "@/services/partymeister-core/EventTypeService";
 

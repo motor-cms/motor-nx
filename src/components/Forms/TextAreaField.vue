@@ -1,32 +1,35 @@
 <template>
-  <div class="relative w-full mb-3">
-    <label :for="id" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+  <div class="form-group" :class="{ 'has-danger': errorMessage }">
+    <label :for="id">
       {{ label }}
     </label>
-    <textarea :id="id"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              :name="name"
-              :value="inputValue"
-              @input="handleChange"
-              @blur="handleBlur"
+    <textarea
+      :id="id"
+      class="form-control"
+      :name="name"
+      :value="inputValue"
+      :class="{ 'is-invalid': errorMessage }"
+      @input="handleChange"
+      @blur="handleBlur"
     ></textarea>
-    <p class="text-red-500" v-if="errorMessage">
+    <p class="text-danger" v-if="errorMessage">
       {{ errorMessage }}
     </p>
   </div>
 </template>
-<script>
+<script lang="ts">
+import { useField } from 'vee-validate'
 
-import {useField} from "vee-validate";
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'TextAreaField',
 
   props: {
     id: String,
     value: {
       type: String,
-      default: "",
+      default: '',
     },
     name: {
       type: String,
@@ -44,16 +47,16 @@ export default {
       handleBlur,
       handleChange,
       meta,
-    } = useField(props.name, undefined, {
-      initialValue: props.value,
-    });
+    } = useField(<string>props.name, undefined, {
+      initialValue: <string>props.value,
+    })
     return {
       handleChange,
       handleBlur,
       errorMessage,
       inputValue,
       meta,
-    };
+    }
   },
-};
+})
 </script>

@@ -1,4 +1,3 @@
-// vue.config.js
 module.exports = {
   runtimeCompiler: true,
 
@@ -11,6 +10,12 @@ module.exports = {
       runtimeOnly: false,
       compositionOnly: false,
       fullInstall: true
+    },
+    moment: {
+      locales: [
+        'en',
+        'de'
+      ]
     }
   }
-};
+}

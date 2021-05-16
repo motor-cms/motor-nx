@@ -1,6 +1,6 @@
 <template>
-  <div class="relative w-full mb-3">
-    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+  <div class="form-group">
+    <label>
       {{ label }}
     </label>
     <p>
@@ -8,15 +8,16 @@
     </p>
   </div>
 </template>
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'StaticField',
 
   props: {
     value: {
       type: String,
-      default: "",
+      default: '',
     },
     label: {
       type: String,
@@ -24,5 +25,5 @@ export default {
     },
     emptyValue: String,
   },
-};
+})
 </script>
