@@ -208,6 +208,58 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import('../views/admin/partymeister-core/schedules/edit.vue'),
   },
+  /**
+   * Visitors
+   */
+  {
+    path: '/admin/partymeister-core/visitors',
+    name: 'admin.partymeister-core.visitors',
+    meta: {
+      layout: 'AdminLayout', // we add new meta layout here to use it later
+      title: 'partymeister-core.visitors.visitors',
+    },
+    beforeEnter: checkAuth,
+    component: () =>
+      import('../views/admin/partymeister-core/visitors/index.vue'),
+  },
+  {
+    path: '/admin/partymeister-core/visitors/create',
+    name: 'admin.partymeister-core.visitors.create',
+    meta: {
+      title: 'partymeister-core.visitors.visitors',
+      breadcrumbs: [
+        {
+          route: 'admin.partymeister-core.visitors',
+          name: 'partymeister-core.visitors.visitors',
+        },
+        {
+          name: 'partymeister-core.visitors.new',
+        },
+      ],
+    },
+    beforeEnter: checkAuth,
+    component: () =>
+      import('../views/admin/partymeister-core/visitors/edit.vue'),
+  },
+  {
+    path: '/admin/partymeister-core/visitors/edit/:id',
+    name: 'admin.partymeister-core.visitors.edit',
+    meta: {
+      title: 'partymeister-core.visitors.visitors',
+      breadcrumbs: [
+        {
+          route: 'admin.partymeister-core.visitors',
+          name: 'partymeister-core.visitors.visitors',
+        },
+        {
+          name: 'partymeister-core.visitors.edit',
+        },
+      ],
+    },
+    beforeEnter: checkAuth,
+    component: () =>
+      import('../views/admin/partymeister-core/visitors/edit.vue'),
+  },
 ]
 
 export default routes
