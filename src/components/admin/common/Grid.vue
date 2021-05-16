@@ -256,7 +256,7 @@ export default defineComponent({
           }
           return moment(value).toString()
         case 'count':
-          return value.length.toString()
+          return value.length ? value.length.toString() : 'ß'
         default:
           return value
       }
