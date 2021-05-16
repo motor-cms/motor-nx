@@ -2,25 +2,21 @@ import { RouteRecordRaw } from 'vue-router'
 import checkAuth from '@/router/checkAuth'
 
 const routes: Array<RouteRecordRaw> = [
+  /**
+   * Callbacks
+   */
   {
     path: '/admin/partymeister-core/callbacks',
     name: 'admin.partymeister-core.callbacks',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     meta: {
       layout: 'AdminLayout', // we add new meta layout here to use it later
       title: 'partymeister-core.callbacks.callbacks',
     },
     beforeEnter: checkAuth,
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/callbacks/index.vue'
-      ),
+      import('../views/admin/partymeister-core/callbacks/index.vue'),
   },
   {
-    // UserProfile will be rendered inside User's <router-view>
-    // when /user/:id/profile is matched
     path: '/admin/partymeister-core/callbacks/create',
     name: 'admin.partymeister-core.callbacks.create',
     meta: {
@@ -37,13 +33,9 @@ const routes: Array<RouteRecordRaw> = [
     },
     beforeEnter: checkAuth,
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/callbacks/edit.vue'
-      ),
+      import('../views/admin/partymeister-core/callbacks/edit.vue'),
   },
   {
-    // UserPosts will be rendered inside User's <router-view>
-    // when /user/:id/posts is matched
     path: '/admin/partymeister-core/callbacks/edit/:id',
     name: 'admin.partymeister-core.callbacks.edit',
     meta: {
@@ -60,29 +52,23 @@ const routes: Array<RouteRecordRaw> = [
     },
     beforeEnter: checkAuth,
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/callbacks/edit.vue'
-      ),
+      import('../views/admin/partymeister-core/callbacks/edit.vue'),
   },
   {
     path: '/admin/partymeister-core/events',
     name: 'admin.partymeister-core.events',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     meta: {
       layout: 'AdminLayout', // we add new meta layout here to use it later
       title: 'partymeister-core.events.events',
     },
     beforeEnter: checkAuth,
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/events/index.vue'
-      ),
+      import('../views/admin/partymeister-core/events/index.vue'),
   },
+  /**
+   * Events
+   */
   {
-    // UserProfile will be rendered inside User's <router-view>
-    // when /user/:id/profile is matched
     path: '/admin/partymeister-core/events/create',
     name: 'admin.partymeister-core.events.create',
     meta: {
@@ -98,14 +84,9 @@ const routes: Array<RouteRecordRaw> = [
       ],
     },
     beforeEnter: checkAuth,
-    component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/events/edit.vue'
-      ),
+    component: () => import('../views/admin/partymeister-core/events/edit.vue'),
   },
   {
-    // UserPosts will be rendered inside User's <router-view>
-    // when /user/:id/posts is matched
     path: '/admin/partymeister-core/events/edit/:id',
     name: 'admin.partymeister-core.events.edit',
     meta: {
@@ -121,30 +102,23 @@ const routes: Array<RouteRecordRaw> = [
       ],
     },
     beforeEnter: checkAuth,
-    component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/events/edit.vue'
-      ),
+    component: () => import('../views/admin/partymeister-core/events/edit.vue'),
   },
+  /**
+   * Event types
+   */
   {
     path: '/admin/partymeister-core/event-types',
     name: 'admin.partymeister-core.event-types',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     meta: {
       layout: 'AdminLayout', // we add new meta layout here to use it later
       title: 'partymeister-core.event_types.event_types',
     },
     beforeEnter: checkAuth,
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/event-types/index.vue'
-      ),
+      import('../views/admin/partymeister-core/event-types/index.vue'),
   },
   {
-    // UserProfile will be rendered inside User's <router-view>
-    // when /user/:id/profile is matched
     path: '/admin/partymeister-core/event-types/create',
     name: 'admin.partymeister-core.event-types.create',
     meta: {
@@ -161,13 +135,9 @@ const routes: Array<RouteRecordRaw> = [
     },
     beforeEnter: checkAuth,
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/event-types/edit.vue'
-      ),
+      import('../views/admin/partymeister-core/event-types/edit.vue'),
   },
   {
-    // UserPosts will be rendered inside User's <router-view>
-    // when /user/:id/posts is matched
     path: '/admin/partymeister-core/event-types/edit/:id',
     name: 'admin.partymeister-core.event-types.edit',
     meta: {
@@ -184,9 +154,59 @@ const routes: Array<RouteRecordRaw> = [
     },
     beforeEnter: checkAuth,
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ '../views/admin/partymeister-core/event-types/edit.vue'
-      ),
+      import('../views/admin/partymeister-core/event-types/edit.vue'),
+  },
+  /**
+   * Schedules
+   */
+  {
+    path: '/admin/partymeister-core/schedules',
+    name: 'admin.partymeister-core.schedules',
+    meta: {
+      layout: 'AdminLayout', // we add new meta layout here to use it later
+      title: 'partymeister-core.schedules.schedules',
+    },
+    beforeEnter: checkAuth,
+    component: () =>
+      import('../views/admin/partymeister-core/schedules/index.vue'),
+  },
+  {
+    path: '/admin/partymeister-core/schedules/create',
+    name: 'admin.partymeister-core.schedules.create',
+    meta: {
+      title: 'partymeister-core.schedules.schedules',
+      breadcrumbs: [
+        {
+          route: 'admin.partymeister-core.schedules',
+          name: 'partymeister-core.schedules.schedules',
+        },
+        {
+          name: 'partymeister-core.schedules.new',
+        },
+      ],
+    },
+    beforeEnter: checkAuth,
+    component: () =>
+      import('../views/admin/partymeister-core/schedules/edit.vue'),
+  },
+  {
+    path: '/admin/partymeister-core/schedules/edit/:id',
+    name: 'admin.partymeister-core.schedules.edit',
+    meta: {
+      title: 'partymeister-core.schedules.schedules',
+      breadcrumbs: [
+        {
+          route: 'admin.partymeister-core.schedules',
+          name: 'partymeister-core.schedules.schedules',
+        },
+        {
+          name: 'partymeister-core.schedules.edit',
+        },
+      ],
+    },
+    beforeEnter: checkAuth,
+    component: () =>
+      import('../views/admin/partymeister-core/schedules/edit.vue'),
   },
 ]
 

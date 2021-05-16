@@ -255,6 +255,8 @@ export default defineComponent({
             return moment(value).format(renderer.format)
           }
           return moment(value).toString()
+        case 'count':
+          return value.length.toString()
         default:
           return value
       }

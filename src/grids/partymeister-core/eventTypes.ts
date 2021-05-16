@@ -11,7 +11,7 @@ export default function eventTypesGrid() {
 
   const { rows, meta, refreshRecords, handleCellEvent } = baseGrid(
     repository,
-    'partymeister-core.events'
+    'partymeister-core.event_types'
   )
 
   return { rows, meta, refreshRecords, handleCellEvent }
