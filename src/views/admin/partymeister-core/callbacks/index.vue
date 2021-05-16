@@ -13,18 +13,14 @@
     @submit-cell="handleCellEvent"
   ></AdminCommonGrid>
 </template>
+
 <script lang="ts">
 import AdminCommonGrid from '@/components/admin/common/Grid.vue'
-// import 'mosha-vue-toastify/dist/style.css'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-// import {useStore} from "vuex";
-import callbackRepository from '@/api/partymeister-core/callbacks'
-// import callbackRepository from "@/repositories/partymeister-core/callbackRepository";
 import EditButton from '@/components/admin/cell/EditButton.vue'
 import DeleteButton from '@/components/admin/cell/DeleteButton.vue'
-import axios from 'axios'
-import { useToast } from 'vue-toastification'
+import callbackGrid from '@/grids/partymeister-core/callbacks'
 
 export default defineComponent({
   name: 'admin-partymeister-core-callbacks',
@@ -34,14 +30,6 @@ export default defineComponent({
   setup() {
     // Load i18n module
     const { t, tm } = useI18n()
-
-    const toast = useToast()
-
-    // Load vuex
-    // const store = useStore();
-
-    // Set page title
-    // store.state.pageTitle = t('partymeister-core.callbacks.callbacks');
 
     // Get options for destination filter
     const destinationOptions = computed(() => {
@@ -116,43 +104,6 @@ export default defineComponent({
       },
     ])
 
-    // WE START THE OUTSOURCED CODE HERE
-    // const { handleCellEvent, deleteRecord, refreshRecords, meta, rows } = callbackRepository(true);
-    const repository = callbackRepository(axios)
-
-    const rows = ref([])
-    const meta = ref({ current_page: 1, from: 1, to: 1 })
-
-    repository.index({}).then((result) => {
-      rows.value = result.data.data
-      meta.value = result.data.meta
-    })
-
-    const refreshRecords = async (params: {}) => {
-      repository.index(params).then((result) => {
-        rows.value = result.data.data
-        meta.value = result.data.meta
-      })
-    }
-
-    const handleCellEvent = async (params: {
-      filterValues: any
-      componentParams: any
-    }) => {
-      switch (params.componentParams.component) {
-        case 'DeleteButton':
-          // Delete the record
-          await repository.delete(params.componentParams.record)
-
-          toast.success(t('partymeister-core.callbacks.deleted'))
-
-          await refreshRecords(params.filterValues)
-          break
-        default:
-          console.log('UNHANDLED EVENT', params.componentParams)
-      }
-    }
-
     const loadComponents = [
       {
         name: 'EditButton',
@@ -164,20 +115,8 @@ export default defineComponent({
       },
     ]
 
-    // const getRecords = (async (params: object = {}) => {
-    //   const response = await repository.index(params)
-    //
-    //   this.rows.value = response.data;
-    //   this.meta.value = response.meta;
-    // })
-    //
-    //
-    // getRecords().then(response => {
-    //
-    // })
-
-    //
-    // console.log(repository)
+    // WE START THE OUTSOURCED CODE HERE
+    const { rows, meta, refreshRecords, handleCellEvent } = callbackGrid()
 
     return {
       columns,

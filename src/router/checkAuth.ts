@@ -6,7 +6,7 @@ export default function checkAuth(
   next: Function
 ) {
   if (!localStorage.getItem('token')) {
-    next('/auth/login')
+    next('/')
   } else {
     next()
   }

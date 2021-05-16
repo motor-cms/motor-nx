@@ -172,9 +172,6 @@ export default defineComponent({
     // Load form
     const { model, actions, destinations, getData, onSubmit } = callbackForm()
 
-    // Set page title
-    // store.state.pageTitle = t('partymeister-core.callbacks.callbacks');
-
     // Set default action title
     const title = ref(t('partymeister-core.callbacks.new'))
 

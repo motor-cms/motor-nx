@@ -10,5 +10,7 @@
   "record_not_found": "Record not found",
   "error_occurred": "An error occurred",
   "back": "Back",
-  "save": "Save"
+  "save": "Save",
+  "logout": "Good bye",
+  "logout_question": "Do you want to log out?"
 }

@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
+import checkAuth from '@/router/checkAuth'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,6 +12,7 @@ const routes: Array<RouteRecordRaw> = [
       layout: 'AdminLayout', // we add new meta layout here to use it later
       title: 'partymeister-core.callbacks.callbacks',
     },
+    beforeEnter: checkAuth,
     component: () =>
       import(
         /* webpackChunkName: "about" */ '../views/admin/partymeister-core/callbacks/index.vue'
@@ -33,6 +35,7 @@ const routes: Array<RouteRecordRaw> = [
         },
       ],
     },
+    beforeEnter: checkAuth,
     component: () =>
       import(
         /* webpackChunkName: "about" */ '../views/admin/partymeister-core/callbacks/edit.vue'
@@ -55,6 +58,7 @@ const routes: Array<RouteRecordRaw> = [
         },
       ],
     },
+    beforeEnter: checkAuth,
     component: () =>
       import(
         /* webpackChunkName: "about" */ '../views/admin/partymeister-core/callbacks/edit.vue'
@@ -69,6 +73,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: 'AdminLayout', // we add new meta layout here to use it later
     },
+    beforeEnter: checkAuth,
     component: () =>
       import(
         /* webpackChunkName: "about" */ '../views/admin/partymeister-core/Events.vue'
@@ -83,6 +88,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: 'AdminLayout', // we add new meta layout here to use it later
     },
+    beforeEnter: checkAuth,
     component: () =>
       import(
         /* webpackChunkName: "about" */ '../views/admin/partymeister-core/EventTypes.vue'

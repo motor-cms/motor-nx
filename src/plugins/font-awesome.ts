@@ -11,6 +11,7 @@ import {
   faImages,
   faPaperPlane,
   faPhotoVideo,
+  faSignOutAlt,
   faTrophy,
   faUser,
 } from '@fortawesome/free-solid-svg-icons'
@@ -33,7 +34,8 @@ library.add(
   faTrophy,
   faCalendar,
   faImages,
-  faCogs
+  faCogs,
+  faSignOutAlt
 )
 
 export { FontAwesomeIcon }

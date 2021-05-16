@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from 'axios'
+import { AxiosInstance } from 'axios'
 
 export default ($axios: AxiosInstance) => ({
   index(params: any) {

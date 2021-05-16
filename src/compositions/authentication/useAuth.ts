@@ -20,7 +20,7 @@ export default function useAuth() {
           'Bearer ' + response.data.data.token
         localStorage.setItem('token', response.data.data.token)
         await axios.get('/api/me').then((response) => {
-          localStorage.setItem('user', JSON.stringify(response.data))
+          localStorage.setItem('user', JSON.stringify(response.data.data))
           authenticated.value = true
         })
       })
@@ -40,7 +40,7 @@ export default function useAuth() {
 
   return {
     signIn,
-    user: user.data,
+    user: user,
     signInError,
     authenticated,
   }

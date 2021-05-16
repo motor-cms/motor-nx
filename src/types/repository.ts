@@ -1,7 +1,7 @@
 export default interface Repository {
-  index: (params: object) => object
+  index: (params: object) => Promise<any>
   create: (payload: object) => Promise<any>
   get: (id: number) => Promise<object>
   update: (payload: object, id: number) => Promise<any>
-  delete: object
+  delete: (id: number) => Promise<object>
 }

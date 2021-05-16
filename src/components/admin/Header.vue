@@ -43,10 +43,7 @@
       <div class="mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <ul class="ms-md-auto pe-md-3 d-flex navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center" v-if="user">
-            <a
-              href="javascript:;"
-              class="nav-link text-body font-weight-bold px-0"
-            >
+            <span class="nav-link text-body font-weight-bold px-0">
               <fa v-if="!user.avatar" icon="user" class="me-sm-1"></fa>
               <img
                 v-if="user.avatar?.conversions?.preview"
@@ -54,7 +51,19 @@
                 class="avatar avatar-sm me-3"
               />
               <span class="d-sm-inline d-none">{{ user.name }}</span>
-            </a>
+            </span>
+          </li>
+          <li class="nav-item d-flex align-items-center" v-if="user">
+            <fa
+              @click="logout"
+              icon="sign-out-alt"
+              class="fixed-plugin-button-nav cursor-pointer ms-2"
+            ></fa>
+            <AdminModalLogout
+              :active="active"
+              @cancel="cancel"
+              @confirm="confirm"
+            />
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a
@@ -71,16 +80,33 @@
   </nav>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import useAuth from '@/compositions/authentication/useAuth'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import AdminModalLogout from '@/components/admin/modal/Logout.vue'
 
 export default defineComponent({
   name: 'AdminHeader',
-  components: {},
-
+  components: { AdminModalLogout },
   setup() {
+    const active = ref(false)
+
+    const router = useRouter()
+
+    const logout = () => {
+      active.value = true
+    }
+    const confirm = () => {
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      router.replace({ name: 'admin.login' })
+    }
+
+    const cancel = () => {
+      active.value = false
+    }
+
     const route = useRoute()
 
     const { t } = useI18n()
@@ -100,7 +126,16 @@ export default defineComponent({
     })
 
     const { authenticated, user } = useAuth()
-    return { authenticated, user, title, breadcrumbs }
+    return {
+      authenticated,
+      user,
+      title,
+      breadcrumbs,
+      confirm,
+      cancel,
+      logout,
+      active,
+    }
   },
 })
 </script>
