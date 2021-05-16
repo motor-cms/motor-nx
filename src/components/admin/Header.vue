@@ -2,6 +2,7 @@
   <nav
     class="
       navbar navbar-main navbar-expand-lg
+      motor-navbar-top
       px-0
       mx-4
       border-radius-xl
@@ -40,7 +41,7 @@
           {{ title }}
         </h6>
       </nav>
-      <div class="mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+      <div class="mt-sm-0 mt-2 me-md-0 me-sm-4" style="flex: auto" id="navbar">
         <ul class="ms-md-auto pe-md-3 d-flex navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center" v-if="user">
             <span class="nav-link text-body font-weight-bold px-0">
