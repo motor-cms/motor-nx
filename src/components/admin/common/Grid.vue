@@ -216,7 +216,6 @@ export default defineComponent({
       object: Component
     }>
     if (components.length) {
-      console.log('preload components')
       components.forEach((component) => {
         this.$options.components[component.name] = component.object
       })
