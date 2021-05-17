@@ -120,7 +120,7 @@
                   class="align-middle text-sm text-wrap"
                   :class="column.rowClass"
                 >
-                  <div class="d-flex px-3 py-1">
+                  <div class="d-flex px-3 py-1" :class="column.rowWrapperClass">
                     <component
                       v-for="component in column.components"
                       :key="component.name"

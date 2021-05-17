@@ -5,6 +5,7 @@ import {
   faChevronLeft,
   faChevronRight,
   faCogs,
+  faEdit,
   faEuroSign,
   faFont,
   faHome,
@@ -12,6 +13,7 @@ import {
   faPaperPlane,
   faPhotoVideo,
   faSignOutAlt,
+  faTrashAlt,
   faTrophy,
   faUser,
 } from '@fortawesome/free-solid-svg-icons'
@@ -35,7 +37,9 @@ library.add(
   faCalendar,
   faImages,
   faCogs,
-  faSignOutAlt
+  faSignOutAlt,
+  faEdit,
+  faTrashAlt
 )
 
 export { FontAwesomeIcon }

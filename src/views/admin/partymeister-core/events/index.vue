@@ -67,6 +67,7 @@ export default defineComponent({
         name: '',
         prop: 'actions',
         columnStyle: 'width: 200px',
+        rowWrapperClass: 'justify-content-end',
         components: [
           {
             name: 'EditButton',

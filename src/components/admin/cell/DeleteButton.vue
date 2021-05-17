@@ -4,8 +4,9 @@
       @click="askForConfirmation"
       class="btn btn-danger btn-sm align-content-end"
       type="button"
+      :title="options.name"
     >
-      {{ options.name }}
+      <fa icon="trash-alt" />
     </button>
     <AdminModalDeleteConfirmation
       :active="active"

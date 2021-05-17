@@ -13,7 +13,7 @@ export default function visitorForm() {
 
   const options = []
   for (const [key, value] of Object.entries(countries)) {
-    options.push({ label: value.name, value: key })
+    options.push({ label: value.emoji + ' ' + value.name, value: key })
   }
 
   // Record
