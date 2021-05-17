@@ -8,7 +8,6 @@
     :meta="meta"
     :filters="filters"
     resource="callbacks"
-    :loadComponents="loadComponents"
     @submit="refreshRecords"
     @submit-cell="handleCellEvent"
   ></AdminCommonGrid>
@@ -104,17 +103,6 @@ export default defineComponent({
       },
     ])
 
-    const loadComponents = [
-      {
-        name: 'EditButton',
-        object: EditButton,
-      },
-      {
-        name: 'DeleteButton',
-        object: DeleteButton,
-      },
-    ]
-
     // WE START THE OUTSOURCED CODE HERE
     const { rows, meta, refreshRecords, handleCellEvent } = callbackGrid()
 
@@ -124,7 +112,6 @@ export default defineComponent({
       rows,
       meta,
       refreshRecords,
-      loadComponents,
       handleCellEvent,
       // deleteRecord,
     }

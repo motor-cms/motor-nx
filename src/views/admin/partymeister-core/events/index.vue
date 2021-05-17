@@ -109,14 +109,6 @@ export default defineComponent({
 
     const loadComponents = [
       {
-        name: 'EditButton',
-        object: EditButton,
-      },
-      {
-        name: 'DeleteButton',
-        object: DeleteButton,
-      },
-      {
         name: 'CellEventType',
         object: CellEventType,
       },

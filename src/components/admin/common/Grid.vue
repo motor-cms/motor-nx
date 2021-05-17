@@ -210,12 +210,13 @@ export default defineComponent({
       default: '',
     },
   },
-  created() {
+  mounted() {
     const components = this.loadComponents as Array<{
       name: string
       object: Component
     }>
     if (components.length) {
+      console.log('preload components')
       components.forEach((component) => {
         this.$options.components[component.name] = component.object
       })
