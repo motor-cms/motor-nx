@@ -1,6 +1,6 @@
 <template>
   <AdminCommonForm
-    back-route="admin.partymeister-core.callbacks"
+    back-route="admin.partymeister-core.events"
     :title="title"
     @submit="onSubmit"
   >
@@ -94,7 +94,7 @@ import { useRouter } from 'vue-router'
 import eventForm from '@/forms/partymeister-core/eventForm'
 
 export default defineComponent({
-  name: 'admin-partymeister-core-callbacks-create',
+  name: 'admin-partymeister-core-events-create',
   components: {
     AdminCommonForm,
     FormsInputField,

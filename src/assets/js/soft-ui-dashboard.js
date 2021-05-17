@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 
 import { bootstrap } from 'bootstrap'
-
 ;('use strict')
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -428,7 +427,8 @@ document.addEventListener('DOMContentLoaded', function () {
         //   sidenav.classList.remove('bg-white');
         // } else {
         if (sidenav) {
-          sidenav.classList.add('bg-white')
+          sidenav.classList.remove('bg-white')
+          sidenav.classList.add('bg-transparent')
         }
         // }
       } else {
@@ -436,7 +436,6 @@ document.addEventListener('DOMContentLoaded', function () {
           sidenav.classList.add('bg-white')
           sidenav.classList.remove('bg-transparent')
         }
-        // sidenav.classList.remove('bg-transparent');
       }
     }
 

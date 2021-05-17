@@ -29,11 +29,12 @@
       ></i>
       <router-link :to="{ name: 'admin.dashboard' }" class="navbar-brand m-0">
         <img
-          src="@/assets/img/motor-logo-small.png"
-          class="navbar-brand-img h-100"
+          src="@/assets/img/pm-logo-small.png"
+          style="max-width: 40px"
+          class="navbar-brand-img"
           alt="Motor NX"
         />
-        <span class="ms-1 font-weight-bold">Motor NX</span>
+        <span class="ms-1 font-weight-bold">{{ $t('global.project') }}</span>
       </router-link>
     </div>
     <hr class="horizontal dark mt-0" />
