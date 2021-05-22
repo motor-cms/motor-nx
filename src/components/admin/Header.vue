@@ -86,6 +86,7 @@ import useAuth from '@/compositions/authentication/useAuth'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AdminModalLogout from '@/components/admin/modal/Logout.vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'AdminHeader',
@@ -126,9 +127,13 @@ export default defineComponent({
       return []
     })
 
-    const { authenticated, user } = useAuth()
+    useAuth()
+
+    const store = useStore()
+
+    const user = computed(() => store.state.motor.user)
+
     return {
-      authenticated,
       user,
       title,
       breadcrumbs,
@@ -136,6 +141,7 @@ export default defineComponent({
       cancel,
       logout,
       active,
+      store,
     }
   },
 })

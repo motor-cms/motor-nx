@@ -16,6 +16,7 @@ import i18n from './i18n'
 import { FontAwesomeIcon } from '@/plugins/font-awesome'
 import EditButton from '@/components/admin/cell/EditButton.vue'
 import DeleteButton from '@/components/admin/cell/DeleteButton.vue'
+import store from './store'
 
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost/'
@@ -23,6 +24,7 @@ axios.defaults.baseURL = 'http://localhost/'
 const app = createApp(App)
   .use(i18n)
   .use(router)
+  .use(store)
   .use(VueAxios, axios)
   .component('fa', FontAwesomeIcon)
   .use(Toast, toastOptions)

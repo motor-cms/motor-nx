@@ -421,3 +421,19 @@
     transform: rotate(2turn);
   }
 }
+.drop-zone {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border: 1px dashed gray;
+  border-radius: 0.5rem;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.over {
+    color: $white;
+    background-color: $primary;
+  }
+}

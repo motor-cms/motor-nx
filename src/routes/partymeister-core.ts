@@ -54,6 +54,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import('../views/admin/partymeister-core/callbacks/edit.vue'),
   },
+  /**
+   * Events
+   */
   {
     path: '/admin/partymeister-core/events',
     name: 'admin.partymeister-core.events',
@@ -65,9 +68,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import('../views/admin/partymeister-core/events/index.vue'),
   },
-  /**
-   * Events
-   */
   {
     path: '/admin/partymeister-core/events/create',
     name: 'admin.partymeister-core.events.create',

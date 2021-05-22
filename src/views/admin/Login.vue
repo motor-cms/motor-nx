@@ -75,10 +75,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, watch } from 'vue'
+import { computed, defineComponent, watch } from 'vue'
 import { ref } from 'vue'
 import useAuth from '@/compositions/authentication/useAuth'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'admin.login',
@@ -91,7 +92,13 @@ export default defineComponent({
       remember: false,
     })
 
-    const { signIn, signInError, authenticated } = useAuth()
+    const { signIn, signInError } = useAuth()
+
+    const store = useStore()
+
+    const authenticated = computed(() => {
+      return store.state.motor.authenticated
+    })
 
     if (authenticated.value) {
       router.push({ name: 'admin.dashboard' })

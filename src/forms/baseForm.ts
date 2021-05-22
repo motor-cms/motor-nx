@@ -12,7 +12,8 @@ export default function baseForm(
   repository: Repository,
   model: Ref<{ [index: string]: any }>,
   schema: ObjectSchema<{}>,
-  sanitizer: () => void = () => {}
+  sanitizer: (formData: object) => void = () => {},
+  afterSubmit: () => void = () => {}
 ) {
   // Load i18n module
   const { t } = useI18n()
@@ -46,25 +47,34 @@ export default function baseForm(
       }
     }
 
+    const formData = <any>{}
+    for (const [key, value] of Object.entries(values)) {
+      if (key !== 'id') {
+        formData[key] = value
+      }
+    }
+
     if (sanitizer !== null) {
-      sanitizer()
+      sanitizer(formData)
     }
 
     let response
     if (model.value.id) {
-      response = await repository.update(model.value, model.value.id)
+      response = await repository.update(formData, model.value.id)
     } else {
       model.value.id = null
-      response = await repository.create(model.value)
+      response = await repository.create(formData)
     }
     switch (response.status) {
       case 200:
         toast.success(t(languageFilePrefix + '.updated'))
         await router.replace({ name: routePrefix })
+        await afterSubmit()
         break
       case 201:
         toast.success(t(languageFilePrefix + '.created'))
         await router.replace({ name: routePrefix })
+        await afterSubmit()
         break
       default:
         toast.error(t('global.error_occurred'))
