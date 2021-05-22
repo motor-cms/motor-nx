@@ -1,6 +1,11 @@
 <template>
   <AdminContainer>
-    <loading v-model:active="spinnerActive" :is-full-page="true" />
+    <loading
+      :opacity="0.5"
+      blur="none"
+      v-model:active="spinnerActive"
+      :is-full-page="true"
+    />
     <router-view />
   </AdminContainer>
 </template>

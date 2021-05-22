@@ -2,6 +2,7 @@ import Repository from '@/types/repository'
 import { ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { useI18n } from 'vue-i18n'
+import { useStore } from 'vuex'
 
 export default function callbackGrid(
   repository: Repository,
@@ -9,22 +10,25 @@ export default function callbackGrid(
 ) {
   const toast = useToast()
 
+  const store = useStore()
+
   const { t } = useI18n()
 
   const rows = ref([])
   const meta = ref({ current_page: 1, from: 1, to: 1 })
 
-  repository.index({}).then((result) => {
-    rows.value = result.data.data
-    meta.value = result.data.meta
-  })
-
   const refreshRecords = async (params: {}) => {
-    repository.index(params).then((result) => {
+    // Show spinner
+    // store.commit('motor/setSpinner', true)
+    await repository.index(params).then((result) => {
       rows.value = result.data.data
       meta.value = result.data.meta
     })
+    // Show spinner
+    // store.commit('motor/setSpinner', false)
   }
+
+  refreshRecords({})
 
   const handleCellEvent = async (params: {
     filterValues: any

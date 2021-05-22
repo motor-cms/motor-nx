@@ -1,10 +1,6 @@
 <template>
   <AdminCommonGrid
-    :name="
-      $t(
-        'motor-backend.users.users'
-      )
-    "
+    :name="$t('motor-backend.users.users')"
     create-route="admin.motor-backend.users.create"
     :create-label="$t('motor-backend.users.new')"
     :rows="rows"
@@ -42,6 +38,15 @@ export default defineComponent({
         prop: 'name',
       },
       {
+        name: t('motor-backend.clients.client'),
+        prop: 'client.name',
+      },
+      {
+        name: t('motor-backend.roles.roles'),
+        prop: 'roles',
+        renderer: { type: 'list', property: 'name' },
+      },
+      {
         name: '',
         prop: 'actions',
         columnStyle: 'width: 200px',
@@ -50,8 +55,7 @@ export default defineComponent({
           {
             name: 'EditButton',
             options: {
-              route:
-                'admin.motor-backend.users.edit',
+              route: 'admin.motor-backend.users.edit',
               name: t('global.edit'),
             },
           },

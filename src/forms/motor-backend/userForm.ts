@@ -4,8 +4,10 @@ import * as yup from 'yup'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import modelRepository from '@/api/motor-backend/user'
-import useAuth from '@/compositions/authentication/useAuth'
 import { useStore } from 'vuex'
+import Repository from '@/types/repository'
+import clientRepository from '@/api/motor-backend/client'
+import roleRepository from '@/api/motor-backend/role'
 
 export default function userForm() {
   // Load i18n module
@@ -20,6 +22,9 @@ export default function userForm() {
   const model = ref({
     id: 0,
     name: '',
+    client: <any>{},
+    client_id: null,
+    roles: <any>[],
     avatar: <any>{},
   })
 
@@ -31,6 +36,35 @@ export default function userForm() {
       formData.avatar = formData.avatar.file.substring(startBase64)
     }
   }
+
+  // Get schedules from api
+  const roles = ref([])
+  const roleRepo: Repository = roleRepository(axios)
+  roleRepo.index({}).then((response) => {
+    const options = []
+    for (let i = 0; i < response.data.data.length; i++) {
+      options.push({
+        name: response.data.data[i].name,
+        value: response.data.data[i].id,
+      })
+    }
+    roles.value = options
+  })
+
+  // Get schedules from api
+  const clients = ref([])
+  const clientRepo: Repository = clientRepository(axios)
+  clientRepo.index({}).then((response) => {
+    const options = []
+    options.push({ name: t('motor-backend.clients.all'), value: null })
+    for (let i = 0; i < response.data.data.length; i++) {
+      options.push({
+        name: response.data.data[i].name,
+        value: response.data.data[i].id,
+      })
+    }
+    clients.value = options
+  })
 
   const store = useStore()
 
@@ -56,5 +90,7 @@ export default function userForm() {
     getData,
     onSubmit,
     model,
+    clients,
+    roles,
   }
 }

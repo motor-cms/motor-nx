@@ -28,6 +28,8 @@ export default function baseForm(
 
   // Get record from id and set values. Redirect back and show error if record was not found
   const getData = async (id: number | string) => {
+    store.commit('motor/setSpinner', true)
+
     const response = await (<any>(
       repository.get(<number>id).catch((e: Error) => {
         toast.error(t('global.record_not_found'))
@@ -35,6 +37,7 @@ export default function baseForm(
       })
     ))
     model.value = response.data.data
+    store.commit('motor/setSpinner', false)
   }
 
   // Initialize form with default values and the validation schema

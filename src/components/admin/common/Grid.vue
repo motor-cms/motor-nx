@@ -109,6 +109,30 @@
                   </h3>
                 </td>
               </tr>
+              <template v-if="rows.length === 0">
+                <tr
+                  v-for="index in 5"
+                  :key="index"
+                  :class="index % 2 === 1 ? 'bg-gray-100' : ''"
+                >
+                  <td
+                    v-for="column in columns"
+                    :key="column.name"
+                    class="align-middle text-sm text-wrap"
+                    :class="column.rowClass"
+                  >
+                    <div
+                      class="d-flex px-3 py-1"
+                      :class="column.rowWrapperClass"
+                    >
+                      <Skeletor
+                        height="30"
+                        :width="Math.random() * 20 + 80 + '%'"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </template>
               <tr
                 v-for="(row, index) in rows"
                 :key="row.id"
@@ -159,6 +183,9 @@ import { Component, defineComponent, ref } from 'vue'
 import SearchFilter from '@/components/admin/filters/SearchFilter.vue'
 import SelectFilter from '@/components/admin/filters/SelectFilter.vue'
 import moment from 'moment'
+import { Skeletor } from 'vue-skeletor'
+import 'vue-skeletor/dist/vue-skeletor.css'
+import { array } from 'yup'
 
 export default defineComponent({
   data() {
@@ -169,6 +196,7 @@ export default defineComponent({
   components: {
     SearchFilter,
     SelectFilter,
+    Skeletor,
   },
   props: {
     name: {
@@ -239,8 +267,13 @@ export default defineComponent({
       this.$emit('submit', this.filterValues)
     },
     renderer(
-      renderer: { type: string; path: string; format: string },
-      value: string
+      renderer: {
+        type: string
+        path: string
+        format: string
+        property: string
+      },
+      value: any
     ): string {
       switch (renderer.type) {
         case 'translation':
@@ -257,6 +290,10 @@ export default defineComponent({
           return moment(value).toString()
         case 'count':
           return value.length ? value.length.toString() : 'ß'
+        case 'list':
+          return value.map((object: any) => {
+            return ' ' + object[renderer.property]
+          })
         default:
           return value
       }
@@ -272,7 +309,7 @@ export default defineComponent({
       let a = property.split('.')
       for (let i = 0, n = a.length; i < n; ++i) {
         var k = a[i]
-        if (k in object) {
+        if (object && k in object) {
           object = object[k]
         } else {
           return
