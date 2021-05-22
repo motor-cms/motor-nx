@@ -5,6 +5,7 @@ import { useToast } from 'vue-toastification'
 import Repository from '@/types/repository'
 import Ref from '@/types/model'
 import ObjectSchema from 'yup/lib/object'
+import { useStore } from 'vuex'
 
 export default function baseForm(
   languageFilePrefix: string,
@@ -20,6 +21,8 @@ export default function baseForm(
 
   // Load router
   const router = useRouter()
+
+  const store = useStore()
 
   const toast = useToast()
 
@@ -41,6 +44,9 @@ export default function baseForm(
   })
 
   const onSubmit = handleSubmit(async (values) => {
+    // Show spinner
+    store.commit('motor/setSpinner', true)
+
     for (const [key, value] of Object.entries(values)) {
       if (key !== 'id') {
         model.value[key] = value
@@ -65,6 +71,10 @@ export default function baseForm(
       model.value.id = null
       response = await repository.create(formData)
     }
+
+    // Disable spinner
+    store.commit('motor/setSpinner', false)
+
     switch (response.status) {
       case 200:
         toast.success(t(languageFilePrefix + '.updated'))

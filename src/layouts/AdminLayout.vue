@@ -1,17 +1,22 @@
 <template>
   <AdminContainer>
+    <loading v-model:active="spinnerActive" :is-full-page="true" />
     <router-view />
   </AdminContainer>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import AdminContainer from '@/components/admin/Container.vue'
 import '@/assets/js/soft-ui-dashboard.js'
+import { useStore } from 'vuex'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default defineComponent({
   name: 'admin-partymeister-core-callbacks',
   components: {
     AdminContainer,
+    Loading,
   },
   setup() {
     document.body.classList.add('g-sidenav-show', 'bg-gray-100')
@@ -26,6 +31,12 @@ export default defineComponent({
         element.select()
       }
     })
+
+    const store = useStore()
+
+    const spinnerActive = computed(() => store.state.motor.spinner)
+
+    return { spinnerActive }
   },
 })
 </script>

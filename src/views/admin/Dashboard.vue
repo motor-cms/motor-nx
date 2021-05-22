@@ -1,5 +1,6 @@
 <template>
   <div>
+    <label><input type="checkbox" v-model="fullPage" />Full page?</label>
     <AdminExampleInfoChart />
     <AdminExampleInfoCard1 />
     <AdminExampleInfoCard2 />
