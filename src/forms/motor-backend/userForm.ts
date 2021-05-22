@@ -35,6 +35,7 @@ export default function userForm() {
   const store = useStore()
 
   const afterSubmit = async () => {
+    // FIXME: only update user if the currently logged in user was updated
     await axios.get('/api/me').then((response) => {
       localStorage.setItem('user', JSON.stringify(response.data.data))
       store.commit('motor/setUser', response.data.data)
