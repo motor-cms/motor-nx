@@ -1,13 +1,13 @@
 <template>
   <AdminCommonGrid
-    :name="$t('motor-backend.clients.clients')"
-    create-route="admin.motor-backend.clients.create"
-    :create-label="$t('motor-backend.clients.new')"
+    :name="$t('motor-backend.languages.languages')"
+    create-route="admin.motor-backend.languages.create"
+    :create-label="$t('motor-backend.languages.new')"
     :rows="rows"
     :columns="columns"
     :meta="meta"
     :filters="filters"
-    resource="clients"
+    resource="languages"
     :loadComponents="loadComponents"
     @submit="refreshRecords"
     @submit-cell="handleCellEvent"
@@ -20,10 +20,10 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import EditButton from '@/components/admin/cell/EditButton.vue'
 import DeleteButton from '@/components/admin/cell/DeleteButton.vue'
-import grid from '@/grids/motor-backend/clientGrid'
+import grid from '@/grids/motor-backend/languageGrid'
 
 export default defineComponent({
-  name: 'admin-motor-backend.clients',
+  name: 'admin-motor-backend.languages',
   components: {
     AdminCommonGrid,
   },
@@ -34,16 +34,16 @@ export default defineComponent({
     // Define columns for grid
     const columns = ref([
       {
-        name: t('motor-backend.clients.name'),
-        prop: 'name',
+        name: t('motor-backend.languages.native_name'),
+        prop: 'native_name',
       },
       {
-        name: t('motor-backend.clients.contact'),
-        prop: 'contact_name',
+        name: t('motor-backend.languages.english_name'),
+        prop: 'english_name',
       },
       {
-        name: t('motor-backend.clients.slug'),
-        prop: 'slug',
+        name: t('motor-backend.languages.iso_639_1'),
+        prop: 'iso_639_1',
       },
       {
         name: '',
@@ -54,7 +54,7 @@ export default defineComponent({
           {
             name: 'EditButton',
             options: {
-              route: 'admin.motor-backend.clients.edit',
+              route: 'admin.motor-backend.languages.edit',
               name: t('global.edit'),
             },
           },

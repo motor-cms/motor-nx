@@ -1,13 +1,13 @@
 <template>
   <AdminCommonGrid
-    :name="$t('motor-backend.clients.clients')"
-    create-route="admin.motor-backend.clients.create"
-    :create-label="$t('motor-backend.clients.new')"
+    :name="$t('motor-backend.email_templates.email_templates')"
+    create-route="admin.motor-backend.email-templates.create"
+    :create-label="$t('motor-backend.email_templates.new')"
     :rows="rows"
     :columns="columns"
     :meta="meta"
     :filters="filters"
-    resource="clients"
+    resource="emailTemplates"
     :loadComponents="loadComponents"
     @submit="refreshRecords"
     @submit-cell="handleCellEvent"
@@ -20,10 +20,10 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import EditButton from '@/components/admin/cell/EditButton.vue'
 import DeleteButton from '@/components/admin/cell/DeleteButton.vue'
-import grid from '@/grids/motor-backend/clientGrid'
+import grid from '@/grids/motor-backend/emailTemplateGrid'
 
 export default defineComponent({
-  name: 'admin-motor-backend.clients',
+  name: 'admin-motor-backend.email-templates',
   components: {
     AdminCommonGrid,
   },
@@ -34,16 +34,16 @@ export default defineComponent({
     // Define columns for grid
     const columns = ref([
       {
-        name: t('motor-backend.clients.name'),
+        name: t('motor-backend.clients.client'),
+        prop: 'client.name',
+      },
+      {
+        name: t('motor-backend.languages.language'),
+        prop: 'language.english_name',
+      },
+      {
+        name: t('motor-backend.global.name'),
         prop: 'name',
-      },
-      {
-        name: t('motor-backend.clients.contact'),
-        prop: 'contact_name',
-      },
-      {
-        name: t('motor-backend.clients.slug'),
-        prop: 'slug',
       },
       {
         name: '',
@@ -54,7 +54,7 @@ export default defineComponent({
           {
             name: 'EditButton',
             options: {
-              route: 'admin.motor-backend.clients.edit',
+              route: 'admin.motor-backend.email-templates.edit',
               name: t('global.edit'),
             },
           },

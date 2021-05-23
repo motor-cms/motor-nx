@@ -1,13 +1,13 @@
 <template>
   <AdminCommonGrid
-    :name="$t('motor-backend.clients.clients')"
-    create-route="admin.motor-backend.clients.create"
-    :create-label="$t('motor-backend.clients.new')"
+    :name="$t('motor-backend.roles.roles')"
+    create-route="admin.motor-backend.roles.create"
+    :create-label="$t('motor-backend.roles.new')"
     :rows="rows"
     :columns="columns"
     :meta="meta"
     :filters="filters"
-    resource="clients"
+    resource="roles"
     :loadComponents="loadComponents"
     @submit="refreshRecords"
     @submit-cell="handleCellEvent"
@@ -20,10 +20,10 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import EditButton from '@/components/admin/cell/EditButton.vue'
 import DeleteButton from '@/components/admin/cell/DeleteButton.vue'
-import grid from '@/grids/motor-backend/clientGrid'
+import grid from '@/grids/motor-backend/roleGrid'
 
 export default defineComponent({
-  name: 'admin-motor-backend.clients',
+  name: 'admin-motor-backend.roles',
   components: {
     AdminCommonGrid,
   },
@@ -34,16 +34,12 @@ export default defineComponent({
     // Define columns for grid
     const columns = ref([
       {
-        name: t('motor-backend.clients.name'),
+        name: t('motor-backend.roles.name'),
         prop: 'name',
       },
       {
-        name: t('motor-backend.clients.contact'),
-        prop: 'contact_name',
-      },
-      {
-        name: t('motor-backend.clients.slug'),
-        prop: 'slug',
+        name: t('motor-backend.roles.guard_name'),
+        prop: 'guard_name',
       },
       {
         name: '',
@@ -54,7 +50,7 @@ export default defineComponent({
           {
             name: 'EditButton',
             options: {
-              route: 'admin.motor-backend.clients.edit',
+              route: 'admin.motor-backend.roles.edit',
               name: t('global.edit'),
             },
           },

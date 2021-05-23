@@ -8,7 +8,7 @@
       Basic information
     </h6>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <FormsInputField
           type="text"
           name="name"
@@ -17,6 +17,111 @@
           :value="model.name"
         ></FormsInputField>
       </div>
+      <div class="col-md-4">
+        <FormsStaticField
+          :label="$t('motor-backend.clients.slug')"
+          :value="model.slug"
+          :empty-value="$t('no_slug_yet')"
+        ></FormsStaticField>
+      </div>
+      <div class="col-md-2">
+        <FormsCheckboxField
+          name="is_active"
+          id="is_active"
+          :label="$t('motor-backend.clients.is_active')"
+          :value="model.is_active"
+        ></FormsCheckboxField>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <FormsTextAreaField
+            name="description"
+            id="description"
+            :label="$t('motor-backend.clients.description')"
+            :value="model.description"
+          ></FormsTextAreaField>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <FormsInputField
+            type="text"
+            name="address"
+            id="address"
+            :label="$t('motor-backend.global.address.address_1')"
+            :value="model.address"
+          ></FormsInputField>
+        </div>
+        <div class="col-md-6">
+          <FormsInputField
+            type="text"
+            name="zip"
+            id="zip"
+            :label="$t('motor-backend.global.address.zip')"
+            :value="model.zip"
+          ></FormsInputField>
+        </div>
+        <div class="col-md-6">
+          <FormsInputField
+            type="text"
+            name="city"
+            id="city"
+            :label="$t('motor-backend.global.address.city')"
+            :value="model.city"
+          ></FormsInputField>
+        </div>
+        <div class="col-md-6">
+          <FormsSelect2Field
+            type="text"
+            name="country_iso_3166_1"
+            id="country_iso_3166_1"
+            :label="$t('motor-backend.global.address.country')"
+            :value="model.country_iso_3166_1"
+            :options="countryOptions"
+          ></FormsSelect2Field>
+        </div>
+      </div>
+      <h6 class="text-uppercase text-body text-xs font-weight-bolder">
+        Contact information
+      </h6>
+      <div class="row">
+        <div class="col-md-6">
+          <FormsInputField
+            type="text"
+            name="contact_name"
+            id="contact_name"
+            :label="$t('motor-backend.clients.contact')"
+            :value="model.contact_name"
+          ></FormsInputField>
+        </div>
+        <div class="col-md-6">
+          <FormsInputField
+            type="text"
+            name="contact_phone"
+            id="contact_phone"
+            :label="$t('motor-backend.global.contact.phone')"
+            :value="model.contact_phone"
+          ></FormsInputField>
+        </div>
+        <div class="col-md-6">
+          <FormsInputField
+            type="text"
+            name="contact_email"
+            id="contact_email"
+            :label="$t('motor-backend.global.contact.email')"
+            :value="model.contact_email"
+          ></FormsInputField>
+        </div>
+        <div class="col-md-6">
+          <FormsInputField
+            type="text"
+            name="website"
+            id="website"
+            :label="$t('motor-backend.global.contact.website')"
+            :value="model.website"
+          ></FormsInputField>
+        </div>
+      </div>
     </div>
   </AdminCommonForm>
 </template>
@@ -24,6 +129,10 @@
 import { defineComponent, ref } from 'vue'
 import AdminCommonForm from '@/components/admin/common/Form.vue'
 import FormsInputField from '@/components/forms/InputField.vue'
+import FormsSelect2Field from '@/components/forms/Select2Field.vue'
+import FormsTextAreaField from '@/components/forms/TextAreaField.vue'
+import FormsCheckboxField from '@/components/forms/CheckboxField.vue'
+import FormsStaticField from '@/components/forms/StaticField.vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import form from '@/forms/motor-backend/clientForm'
@@ -33,6 +142,10 @@ export default defineComponent({
   components: {
     AdminCommonForm,
     FormsInputField,
+    FormsSelect2Field,
+    FormsTextAreaField,
+    FormsCheckboxField,
+    FormsStaticField,
   },
   setup() {
     // Load i18n module
@@ -42,7 +155,7 @@ export default defineComponent({
     const router = useRouter()
 
     // Load form
-    const { model, getData, onSubmit } = form()
+    const { model, getData, onSubmit, countryOptions } = form()
 
     // Set default action title
     const title = ref(t('motor-backend.clients.new'))
@@ -58,6 +171,7 @@ export default defineComponent({
       model,
       title,
       onSubmit,
+      countryOptions,
     }
   },
 })

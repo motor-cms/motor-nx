@@ -9,22 +9,22 @@ export default ($axios: AxiosInstance) => ({
             }, [])
             .join('&')
 
-        return $axios.get('/api/roles?' + queryString)
+        return $axios.get('/api/config_variables?' + queryString)
     },
 
     create(payload: object) {
-        return $axios.post(`/api/roles`, payload)
+        return $axios.post(`/api/config_variables`, payload)
     },
 
     get(id: number): Promise<object> {
-        return $axios.get(`/api/roles/${id}`)
+        return $axios.get(`/api/config_variables/${id}`)
     },
 
     update(payload: object, id: number) {
-        return $axios.put(`/api/roles/${id}`, payload)
+        return $axios.put(`/api/config_variables/${id}`, payload)
     },
 
     delete(id: number) {
-        return $axios.delete(`/api/roles/${id}`)
+        return $axios.delete(`/api/config_variables/${id}`)
     },
 })
