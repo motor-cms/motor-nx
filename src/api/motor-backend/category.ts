@@ -14,16 +14,24 @@ export default ($axios: AxiosInstance) => ({
     )
   },
 
-  create(payload: object) {
-    return $axios.post(`/api/categories`, payload)
+  create(payload: object, params: { category_tree: number }) {
+    return $axios.post(
+      `/api/category_trees/${params.category_tree}/categories`,
+      payload
+    )
   },
 
-  get(id: number, category_tree: number): Promise<object> {
-    return $axios.get(`/api/category_trees/${category_tree}/categories/${id}`)
+  get(id: number, params: { category_tree: number }): Promise<object> {
+    return $axios.get(
+      `/api/category_trees/${params.category_tree}/categories/${id}`
+    )
   },
 
-  update(payload: object, id: number) {
-    return $axios.put(`/api/categories/${id}`, payload)
+  update(payload: object, id: number, params: { category_tree: number }) {
+    return $axios.put(
+      `/api/category_trees/${params.category_tree}/categories/${id}`,
+      payload
+    )
   },
 
   delete(id: number) {

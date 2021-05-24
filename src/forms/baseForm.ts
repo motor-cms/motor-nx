@@ -2,7 +2,7 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useForm } from 'vee-validate'
 import { useToast } from 'vue-toastification'
-import Repository from '@/types/repository'
+// import Repository from '@/types/repository'
 import Ref from '@/types/model'
 import ObjectSchema from 'yup/lib/object'
 import { useStore } from 'vuex'
@@ -10,11 +10,12 @@ import { useStore } from 'vuex'
 export default function baseForm(
   languageFilePrefix: string,
   routePrefix: string,
-  repository: Repository,
+  repository: any,
   model: Ref<{ [index: string]: any }>,
   schema: ObjectSchema<{}>,
   sanitizer: (formData: object) => void = () => {},
-  afterSubmit: () => void = () => {}
+  afterSubmit: () => void = () => {},
+  repositoryParams?: {}
 ) {
   // Load i18n module
   const { t } = useI18n()
@@ -31,7 +32,7 @@ export default function baseForm(
     store.commit('motor/setSpinner', true)
 
     const response = await (<any>(
-      repository.get(<number>id).catch((e: Error) => {
+      repository.get(<number>id, repositoryParams).catch((e: Error) => {
         toast.error(t('global.record_not_found'))
         router.replace({ name: routePrefix })
       })
@@ -48,7 +49,7 @@ export default function baseForm(
 
   const onSubmit = handleSubmit(async (values) => {
     // Show spinner
-    store.commit('motor/setSpinner', true)
+    // store.commit('motor/setSpinner', true)
 
     for (const [key, value] of Object.entries(values)) {
       if (key !== 'id') {
@@ -69,10 +70,14 @@ export default function baseForm(
 
     let response
     if (model.value.id) {
-      response = await repository.update(formData, model.value.id)
+      response = await repository.update(
+        formData,
+        model.value.id,
+        repositoryParams
+      )
     } else {
       model.value.id = null
-      response = await repository.create(formData)
+      response = await repository.create(formData, repositoryParams)
     }
 
     // Disable spinner
@@ -97,6 +102,7 @@ export default function baseForm(
 
   return {
     getData,
+    handleSubmit,
     onSubmit,
   }
 }

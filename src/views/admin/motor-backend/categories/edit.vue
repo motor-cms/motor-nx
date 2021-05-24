@@ -8,7 +8,7 @@
       Basic information
     </h6>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
         <FormsInputField
           type="text"
           name="name"
@@ -17,6 +17,14 @@
           :value="model.name"
         ></FormsInputField>
       </div>
+      <div class="col-md-4">
+        <NestedTree :tree="treeData.children" :record="model.id" />
+        <!--        <tree-->
+        <!--          id="category-tree"-->
+        <!--          :tree-data="treeData"-->
+        <!--          :record="model.id"-->
+        <!--        ></tree>-->
+      </div>
     </div>
   </AdminCommonForm>
 </template>
@@ -24,6 +32,9 @@
 import { defineComponent, ref } from 'vue'
 import AdminCommonForm from '@/components/admin/common/Form.vue'
 import FormsInputField from '@/components/forms/InputField.vue'
+// import Tree from '@/components/admin/common/Tree.vue'
+import NestedTree from '@/components/admin/common/NestedTree.vue'
+
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import form from '@/forms/motor-backend/categoryForm'
@@ -33,6 +44,8 @@ export default defineComponent({
   components: {
     AdminCommonForm,
     FormsInputField,
+    // Tree,
+    NestedTree,
   },
   setup() {
     // Load i18n module
@@ -42,7 +55,7 @@ export default defineComponent({
     const router = useRouter()
 
     // Load form
-    const { model, getData } = form()
+    const { model, getData, onSubmit, treeData } = form()
 
     // Set default action title
     const title = ref(t('motor-backend.categories.new'))
@@ -57,7 +70,8 @@ export default defineComponent({
     return {
       model,
       title,
-      // onSubmit,
+      onSubmit,
+      treeData,
     }
   },
 })
