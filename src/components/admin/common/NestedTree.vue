@@ -9,7 +9,13 @@
   >
     <template #item="{ element }">
       <li>
-        <p>{{ element.name }}</p>
+        <fa v-if="element.id !== record" icon="folder"></fa>
+        <fa
+          v-if="element.id === record"
+          icon="file"
+          style="color: #cb0c9f"
+        ></fa>
+        {{ element.name }}
         <nested-draggable :tree="element.children" :record="record" />
       </li>
     </template>
@@ -47,7 +53,8 @@ export default defineComponent({
 </script>
 <style scoped>
 .dragArea {
-  min-height: 50px;
-  outline: 1px dashed;
+  list-style-type: none; /* Remove bullets */
+  /*min-height: 50px;*/
+  /*outline: 1px dashed;*/
 }
 </style>

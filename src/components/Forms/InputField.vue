@@ -10,7 +10,7 @@
       :name="name"
       :value="inputValue"
       :class="{ 'is-invalid': errorMessage }"
-      @input="handleChange"
+      @input="changed"
       @blur="handleBlur"
     />
     <p class="text-danger" v-if="errorMessage">
@@ -47,7 +47,7 @@ export default defineComponent({
       default: '',
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const {
       value: inputValue,
       errorMessage,
@@ -57,12 +57,19 @@ export default defineComponent({
     } = useField(<string>props.name, undefined, {
       initialValue: <string>props.value,
     })
+
+    const changed = (e: Event) => {
+      handleChange(e)
+      emit('change', (<HTMLInputElement>e.target).value)
+    }
+
     return {
       handleChange,
       handleBlur,
       errorMessage,
       inputValue,
       meta,
+      changed,
     }
   },
 })

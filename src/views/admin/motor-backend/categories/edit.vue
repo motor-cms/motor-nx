@@ -15,6 +15,7 @@
           id="name"
           :label="$t('motor-backend.categories.name')"
           :value="model.name"
+          @change="changed"
         ></FormsInputField>
       </div>
       <div class="col-md-4">
@@ -55,7 +56,7 @@ export default defineComponent({
     const router = useRouter()
 
     // Load form
-    const { model, getData, onSubmit, treeData } = form()
+    const { model, getData, onSubmit, treeData, replaceCategoryName } = form()
 
     // Set default action title
     const title = ref(t('motor-backend.categories.new'))
@@ -67,11 +68,16 @@ export default defineComponent({
       getData(id)
     }
 
+    const changed = (value: any) => {
+      replaceCategoryName(value)
+    }
+
     return {
       model,
       title,
       onSubmit,
       treeData,
+      changed,
     }
   },
 })

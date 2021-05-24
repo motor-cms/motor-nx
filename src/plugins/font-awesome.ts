@@ -7,6 +7,8 @@ import {
   faCogs,
   faEdit,
   faEuroSign,
+  faFile,
+  faFolder,
   faFont,
   faHome,
   faImages,
@@ -39,7 +41,9 @@ library.add(
   faCogs,
   faSignOutAlt,
   faEdit,
-  faTrashAlt
+  faTrashAlt,
+  faFolder,
+  faFile
 )
 
 export { FontAwesomeIcon }
