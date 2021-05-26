@@ -20,11 +20,6 @@
       </div>
       <div class="col-md-4">
         <NestedTree :tree="treeData.children" :record="model.id" />
-        <!--        <tree-->
-        <!--          id="category-tree"-->
-        <!--          :tree-data="treeData"-->
-        <!--          :record="model.id"-->
-        <!--        ></tree>-->
       </div>
     </div>
   </AdminCommonForm>

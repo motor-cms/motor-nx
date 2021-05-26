@@ -8,7 +8,6 @@ import categoryTreeRepository from '@/api/motor-backend/categoryTree'
 import { useStore } from 'vuex'
 import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
-import categoryTree from '@/api/motor-backend/categoryTree'
 
 export default function categoryForm() {
   // Load i18n module

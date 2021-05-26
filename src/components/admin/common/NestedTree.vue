@@ -39,7 +39,7 @@ export default defineComponent({
   },
   name: 'nested-draggable',
   setup(props) {
-    const checkMove = (event) => {
+    const checkMove = (event: any) => {
       if (
         event.draggedContext &&
         event.draggedContext.element.id !== props.record
