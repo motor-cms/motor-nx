@@ -51,6 +51,7 @@
               name="file"
               id="file"
               :allow-delete="false"
+              :multiple="multiple"
               :label="$t('motor-media.files.file')"
               :value="model.file"
             ></FormsFileField>
@@ -100,11 +101,14 @@ export default defineComponent({
     // Set default action title
     const title = ref(t('motor-media.files.new'))
 
+    const multiple = ref(true)
+
     // Get id from route and load record
     const id: string = router.currentRoute.value.params.id as string
     if (id) {
       title.value = t('motor-media.files.edit')
       getData(id)
+      multiple.value = false
     }
 
     // Sanitize roles
@@ -127,6 +131,7 @@ export default defineComponent({
       title,
       onSubmit,
       treeData,
+      multiple,
     }
   },
 })

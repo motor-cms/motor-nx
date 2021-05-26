@@ -6,8 +6,14 @@
     <div class="d-none">
       <input :id="id" type="file" :name="name" />
     </div>
-    <div class="row" style="padding-left: 0.75rem">
+    <div
+      class="row"
+      style="padding-left: 0.75rem"
+      v-for="(file, index) in files"
+      :key="index"
+    >
       <div
+        v-if="index === 0"
         class="col-md-4 drop-zone"
         :style="
           isImage(file.type)
@@ -24,13 +30,45 @@
         }"
       >
         <span v-if="file.dataUrl === '' && !inputValue?.conversions">
-          {{ $t('motor-backend.global.drop_file_here') }}
+          <template v-if="multiple">
+            {{ $t('motor-media.global.drop_files_here') }}
+          </template>
+          <template v-else>
+            {{ $t('motor-media.global.drop_file_here') }}
+          </template>
         </span>
         <span v-if="!isImage(file.type)" style="overflow-wrap: anywhere">
           {{ file.type }}
         </span>
       </div>
-      <div class="col-md-8" v-if="status.dropped || inputValue?.conversions">
+
+      <div
+        v-if="index > 0"
+        class="col-md-4 drop-zone"
+        :style="
+          isImage(file.type)
+            ? 'background-image:url(' +
+              (file.dataUrl || inputValue?.conversions?.preview) +
+              ');'
+            : ''
+        "
+      >
+        <span v-if="file.dataUrl === '' && !inputValue?.conversions">
+          <template v-if="multiple">
+            {{ $t('motor-media.global.drop_files_here') }}
+          </template>
+          <template v-else>
+            {{ $t('motor-media.global.drop_file_here') }}
+          </template>
+        </span>
+        <span v-if="!isImage(file.type)" style="overflow-wrap: anywhere">
+          {{ file.type }}
+        </span>
+      </div>
+      <div
+        class="col-md-8"
+        v-if="(status.dropped || inputValue?.conversions) && file.name !== ''"
+      >
         <button
           v-if="allowDelete"
           @click="deleteImage"
@@ -84,20 +122,30 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
-    // Create a property that holds the file information
-    const file = ref({
+    const fileTemplate = {
       name: '',
       size: 0,
       dataUrl: <any>'',
       type: '',
-    })
+    }
+
+    // Create a property that holds the file information
+    const files = ref([fileTemplate])
+
+    const file = ref(fileTemplate)
     // Add the drag and drop status as an object
     const status = ref({
       over: false,
       dropped: false,
     })
+
+    const fileCount = ref(0)
 
     const handleDragOver = () => {
       status.value.over = true
@@ -110,32 +158,64 @@ export default defineComponent({
     const handleDrop = (event: any) => {
       status.value.dropped = true
       status.value.over = false
-      const fileItem = event.dataTransfer.items[0].getAsFile()
+
+      // reset file count and clear files
+      fileCount.value = 0
+      if (props.multiple) {
+        files.value = [fileTemplate]
+      } else {
+        files.value = []
+      }
 
       const fileInput = <HTMLInputElement>(
         document.getElementById(props.id.toString())
       )
+      // if (!props.multiple) {
+      //   fileInput.files = <any[]>event.dataTransfer.files[0]
+      // } else {
       fileInput.files = event.dataTransfer.files
+      // }
 
-      file.value = {
-        name: fileItem.name,
-        size: parseFloat((fileItem.size / 1000).toFixed(2)),
-        dataUrl: '',
-        type: fileItem.type,
-      }
+      for (let i = 0; i < fileInput.files.length; i++) {
+        const fileItem = event.dataTransfer.items[i].getAsFile()
+        let tempFile = {
+          name: fileItem.name,
+          size: parseFloat((fileItem.size / 1000).toFixed(2)),
+          dataUrl: '',
+          type: fileItem.type,
+        }
 
-      const reader = new FileReader()
-      // Read the file's content as base64 encoded string, represented by a url
-      reader.readAsDataURL(fileItem)
+        const reader = new FileReader()
+        // Read the file's content as base64 encoded string, represented by a url
+        reader.readAsDataURL(fileItem)
 
-      // Wait for the browser to finish reading and fire the onloaded-event:
-      reader.onloadend = (event) => {
-        // Take the reader's result and use it for the next method
-        const fileResult = event.target.result
-        file.value.dataUrl = fileResult
-        handleChange({ file: fileResult })
+        // Wait for the browser to finish reading and fire the onloaded-event:
+        reader.onloadend = (event) => {
+          fileCount.value++
+          // Take the reader's result and use it for the next method
+          const fileResult = event.target.result
+          tempFile.dataUrl = <string>fileResult
+          files.value.push(tempFile)
+        }
       }
     }
+
+    watch(fileCount, (value) => {
+      if (props.multiple) {
+        if (<number>value === files.value.length - 1) {
+          console.log('change approved (multi)')
+          handleChange({ file: files })
+        }
+      } else {
+        if (files.value.length === 0) {
+          return
+        }
+        if (<number>value === files.value.length) {
+          console.log('change approved (single)')
+          handleChange({ file: files })
+        }
+      }
+    })
 
     // Check mimetype before displaying an image
     const isImage = (type: string) => {
@@ -168,12 +248,14 @@ export default defineComponent({
 
     watch(inputValue, (value) => {
       if (value && !value.file) {
-        file.value = {
-          name: value.file_name,
-          size: parseFloat((value.size / 1000).toFixed(2)),
-          dataUrl: '',
-          type: value.mime_type,
-        }
+        files.value = [
+          {
+            name: value.file_name,
+            size: parseFloat((value.size / 1000).toFixed(2)),
+            dataUrl: '',
+            type: value.mime_type,
+          },
+        ]
       }
     })
 
@@ -184,6 +266,7 @@ export default defineComponent({
       inputValue,
       meta,
       file,
+      files,
       status,
       deleteImage,
       handleDragOver,

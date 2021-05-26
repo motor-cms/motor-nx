@@ -29,10 +29,20 @@ export default function fileForm() {
 
   // Sanitize dates
   const sanitizer = async (formData: any) => {
-    // Find start of base64 string
-    if (formData.file.file) {
-      const startBase64 = formData.file.file.indexOf(',') + 1
-      formData.file = formData.file.file.substring(startBase64)
+    // Handle an array of files
+    if (formData.file.file && Array.isArray(formData.file.file)) {
+      const tempFiles = []
+      for (let i = 0; i < formData.file.file.length; i++) {
+        if (formData.file.file[i].dataUrl !== '') {
+          const startBase64 = formData.file.file[i].dataUrl.indexOf(',') + 1
+          tempFiles.push(formData.file.file[i].dataUrl.substring(startBase64))
+        }
+      }
+      if (formData.file.file.length == 1) {
+        formData.file = tempFiles[0]
+      } else {
+        formData.file = tempFiles
+      }
     }
   }
 
