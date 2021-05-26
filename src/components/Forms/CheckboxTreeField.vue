@@ -25,7 +25,7 @@
         />
       </li>
     </ul>
-    <p class="text-danger" v-if="errorMessage">
+    <p class="text-danger" v-if="errorMessage && level === 0">
       {{ errorMessage }}
     </p>
   </div>

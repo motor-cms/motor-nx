@@ -12,7 +12,8 @@ export default function fileForm() {
 
   // Validation schema
   const schema = yup.object().shape({
-    categories: yup.array().required(),
+    author: yup.string().required(),
+    categories: yup.array().min(1).required(),
   })
 
   // Record
