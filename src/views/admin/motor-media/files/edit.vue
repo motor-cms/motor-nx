@@ -46,6 +46,15 @@
               :value="model.alt_text"
             ></FormsInputField>
           </div>
+          <div class="col-md-12">
+            <FormsFileField
+              name="file"
+              id="file"
+              :allow-delete="false"
+              :label="$t('motor-media.files.file')"
+              :value="model.file"
+            ></FormsFileField>
+          </div>
         </div>
       </div>
       <div class="col-md-4">
@@ -64,6 +73,7 @@
 import { defineComponent, ref, watch } from 'vue'
 import AdminCommonForm from '@/components/admin/common/Form.vue'
 import FormsInputField from '@/components/forms/InputField.vue'
+import FormsFileField from '@/components/forms/FileField.vue'
 import FormsCheckboxTreeField from '@/components/forms/CheckboxTreeField.vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
@@ -75,6 +85,7 @@ export default defineComponent({
     AdminCommonForm,
     FormsInputField,
     FormsCheckboxTreeField,
+    FormsFileField,
   },
   setup() {
     // Load i18n module

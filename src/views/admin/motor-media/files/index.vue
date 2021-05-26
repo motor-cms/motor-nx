@@ -21,6 +21,10 @@ import { useI18n } from 'vue-i18n'
 import EditButton from '@/components/admin/cell/EditButton.vue'
 import DeleteButton from '@/components/admin/cell/DeleteButton.vue'
 import grid from '@/grids/motor-media/fileGrid'
+import CellFile from '@/components/admin/cell/File.vue'
+import Repository from '@/types/repository'
+import axios from 'axios'
+import categoryRepository from '@/api/motor-backend/category'
 
 export default defineComponent({
   name: 'admin-motor-media.files',
@@ -33,6 +37,11 @@ export default defineComponent({
 
     // Define columns for grid
     const columns = ref([
+      {
+        name: t('motor-media.files.file'),
+        prop: 'file',
+        components: [{ name: 'CellFile' }],
+      },
       {
         name: t('motor-media.files.name'),
         prop: 'file.file_name',
@@ -60,9 +69,36 @@ export default defineComponent({
     ])
 
     // Define filters for grid
-    const filters = ref([{ name: 'SearchFilter', options: {} }])
+    const filters = ref([
+      { name: 'SearchFilter', options: {} },
+      {
+        name: 'SelectFilter',
+        options: {
+          parameter: 'category_id',
+          emptyOption:
+            t('global.filter') + ': ' + t('motor-backend.categories.category'),
+          options: <any>[],
+        },
+      },
+    ])
 
-    const loadComponents = <any>[]
+    // Get catgories from api
+    const categoryRepo = categoryRepository(axios)
+    categoryRepo.index({}, '1').then((response) => {
+      for (let i = 0; i < response.data.data.length; i++) {
+        filters.value[1].options.options.push({
+          name: response.data.data[i].name,
+          value: response.data.data[i].id,
+        })
+      }
+    })
+
+    const loadComponents = [
+      {
+        name: 'CellFile',
+        object: CellFile,
+      },
+    ]
 
     // WE START THE OUTSOURCED CODE HERE
     const { rows, meta, refreshRecords, handleCellEvent } = grid()

@@ -23,10 +23,17 @@ export default function fileForm() {
     source: '',
     alt_text: '',
     categories: [],
+    file: <any>{},
   })
 
   // Sanitize dates
-  const sanitizer = () => {}
+  const sanitizer = async (formData: any) => {
+    // Find start of base64 string
+    if (formData.file.file) {
+      const startBase64 = formData.file.file.indexOf(',') + 1
+      formData.file = formData.file.file.substring(startBase64)
+    }
+  }
 
   const { getData, onSubmit } = baseForm(
     'motor-media.files',

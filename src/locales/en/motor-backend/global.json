@@ -71,5 +71,6 @@
     "success": "Success"
   },
   "are_you_sure": "Are you sure?",
-  "no_slug_yet": "No slug yet"
+  "no_slug_yet": "No slug yet",
+  "drop_file_here": "Drop file here"
 }

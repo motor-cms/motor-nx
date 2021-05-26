@@ -23,12 +23,12 @@
           :label="$t('motor-backend.users.name')"
           :value="model.name"
         ></FormsInputField>
-        <FormsImageField
+        <FormsFileField
           name="avatar"
           id="avatar"
           :label="$t('motor-backend.users.avatar')"
           :value="model.avatar"
-        ></FormsImageField>
+        ></FormsFileField>
         <FormsCheckboxArrayField
           name="roles"
           id="roles"
@@ -45,7 +45,7 @@ import { defineComponent, ref, watch } from 'vue'
 import AdminCommonForm from '@/components/admin/common/Form.vue'
 import FormsSelectField from '@/components/forms/SelectField.vue'
 import FormsInputField from '@/components/forms/InputField.vue'
-import FormsImageField from '@/components/forms/ImageField.vue'
+import FormsFileField from '@/components/forms/FileField.vue'
 import FormsCheckboxArrayField from '@/components/forms/CheckboxArrayField.vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
@@ -56,7 +56,7 @@ export default defineComponent({
   components: {
     AdminCommonForm,
     FormsInputField,
-    FormsImageField,
+    FormsFileField,
     FormsSelectField,
     FormsCheckboxArrayField,
   },
