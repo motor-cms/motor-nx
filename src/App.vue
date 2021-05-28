@@ -8,7 +8,7 @@ import AdminLayout from '@/layouts/AdminLayout.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'admin-partymeister-core-callbacks',
+  name: 'admin-backend',
   components: {
     AuthLayout,
     AdminLayout,

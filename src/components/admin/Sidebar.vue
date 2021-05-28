@@ -40,11 +40,7 @@
     <hr class="horizontal dark mt-0" />
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
-        <li
-          class="nav-item"
-          v-for="(item, index) in navigationItems"
-          :key="index"
-        >
+        <li class="nav-item" v-for="item in navigationItems" :key="item.name">
           <router-link
             @click="toggleMenu(item.slug)"
             v-if="item.route && router.hasRoute(item.route)"

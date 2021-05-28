@@ -53,7 +53,7 @@ import { useRouter } from 'vue-router'
 import eventTypeForm from '@/forms/partymeister-core/eventTypeForm'
 
 export default defineComponent({
-  name: 'admin-partymeister-core-callbacks-create',
+  name: 'admin-partymeister-core-callbacks-edit',
   components: {
     AdminCommonForm,
     FormsInputField,
