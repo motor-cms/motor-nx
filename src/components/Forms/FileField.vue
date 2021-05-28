@@ -80,7 +80,7 @@
         <p><strong>File:</strong> {{ file.name }}</p>
         <p>
           <strong>Type:</strong>
-          {{ file.type }} kb
+          {{ file.type }}
         </p>
         <p>
           <strong>Size:</strong>
@@ -204,7 +204,7 @@ export default defineComponent({
       if (props.multiple) {
         if (<number>value === files.value.length - 1) {
           console.log('change approved (multi)')
-          handleChange({ file: files })
+          handleChange(files)
         }
       } else {
         if (files.value.length === 0) {
@@ -212,7 +212,7 @@ export default defineComponent({
         }
         if (<number>value === files.value.length) {
           console.log('change approved (single)')
-          handleChange({ file: files })
+          handleChange(files.value[0])
         }
       }
     })
@@ -233,7 +233,8 @@ export default defineComponent({
     }
 
     const deleteImage = () => {
-      handleChange({ file: false })
+      console.log('HIER')
+      handleChange(false)
     }
 
     const {
@@ -246,7 +247,7 @@ export default defineComponent({
       initialValue: props.value,
     })
 
-    watch(inputValue, (value) => {
+    const initialWatcher = watch(inputValue, (value) => {
       if (value && !value.file) {
         files.value = [
           {
@@ -256,6 +257,8 @@ export default defineComponent({
             type: value.mime_type,
           },
         ]
+        // Unwatch it again after it has been set once
+        initialWatcher()
       }
     })
 

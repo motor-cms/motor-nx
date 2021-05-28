@@ -58,6 +58,7 @@ export default function baseForm(
     }
 
     const formData = <any>{}
+
     for (const [key, value] of Object.entries(values)) {
       if (key !== 'id') {
         formData[key] = value

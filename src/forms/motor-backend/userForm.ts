@@ -28,12 +28,12 @@ export default function userForm() {
     avatar: <any>{},
   })
 
-  // Sanitize dates
+  // Sanitize data url
   const sanitizer = async (formData: any) => {
     // Find start of base64 string
-    if (formData.avatar.file) {
-      const startBase64 = formData.avatar.file.indexOf(',') + 1
-      formData.avatar = formData.avatar.file.substring(startBase64)
+    if (formData.avatar.dataUrl) {
+      const startBase64 = formData.avatar.dataUrl.indexOf(',') + 1
+      formData.avatar.dataUrl = formData.avatar.dataUrl.substring(startBase64)
     }
   }
 

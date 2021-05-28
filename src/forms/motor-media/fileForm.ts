@@ -27,21 +27,33 @@ export default function fileForm() {
     file: <any>{},
   })
 
-  // Sanitize dates
+  // Sanitize file data
   const sanitizer = async (formData: any) => {
     // Handle an array of files
-    if (formData.file.file && Array.isArray(formData.file.file)) {
+    if (formData.file && Array.isArray(formData.file)) {
       const tempFiles = []
-      for (let i = 0; i < formData.file.file.length; i++) {
-        if (formData.file.file[i].dataUrl !== '') {
-          const startBase64 = formData.file.file[i].dataUrl.indexOf(',') + 1
-          tempFiles.push(formData.file.file[i].dataUrl.substring(startBase64))
+      for (let i = 0; i < formData.file.length; i++) {
+        if (formData.file[i].dataUrl !== '') {
+          const startBase64 = formData.file[i].dataUrl.indexOf(',') + 1
+          tempFiles.push({
+            name: formData.file[i].name,
+            dataUrl: formData.file[i].dataUrl.substring(startBase64),
+          })
         }
       }
-      if (formData.file.file.length == 1) {
-        formData.file = tempFiles[0]
+      if (formData.file.length == 1) {
+        formData.file = [tempFiles[0]]
       } else {
         formData.file = tempFiles
+      }
+    } else {
+      // Handle a single file
+      if (formData.file.dataUrl !== '') {
+        const startBase64 = formData.file.dataUrl.indexOf(',') + 1
+        formData.file = {
+          name: formData.file.name,
+          dataUrl: formData.file.dataUrl.substring(startBase64),
+        }
       }
     }
   }
